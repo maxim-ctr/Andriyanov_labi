@@ -176,10 +176,98 @@ void Output(const Pipe& p, const Station& s)
 	}
 }
 
+void Save(const Pipe& p, const Station& s) {
+	ofstream file;
+	file.open("database.txt");
+	// if(arrayStation.length() != 0) {}
+	// for (int i; i < arrayStation.length(); i++){}
+	if (file.good()) {
+		if (p.length > 0) {
+			file << "Pipe:\n";
+			file << p.id << "\n";
+			file << p.diameter << "\n";
+			file << p.length << "\n";
+			file << p.isWorking << "\n";
+		}
+		if (s.name != "") {
+			file << "Station:\n";
+			file << s.id << "\n";
+			file << s.name << "\n";
+			file << s.number_of_workshops << "\n";
+			file << s.number_of_working_workshops << "\n";
+			file << s.Efficiency;
+		}
+		file.close();
+		cout << "Saved\n";
+	}
+}
+
+void Load(Pipe& p, Station& s) {
+	ifstream file;
+	file.open("database.txt");
+	if (file.good()) {
+		while (!file.eof()) {
+			string type;
+			file >> type;
+			if (type == "Pipe:") {
+				file >> p.id;
+				file >> p.diameter;
+				file >> p.length;
+				file >> p.isWorking;
+			}
+			if (type == "Station:") {
+				file >> s.id;
+				file >> s.name;
+				file >> s.number_of_workshops;
+				file >> s.number_of_working_workshops;
+				file >> s.Efficiency;
+			}
+		}
+	}
+	cout << "Loaded\n";
+}
+
+
 
 
 int main()
 {
-	
+	Pipe p1;
+	p1.length = -1;  // êîñòûëü
+	Station s1;
+	s1.name = "";  // êîñòûëü
+
+	while (1) {
+		printMenu();
+		switch (input_integer()) {
+		case 0:
+			cout << "\nExit\n";
+			return 0;
+		case 1:
+			p1 = AddPipe(0);
+			break;
+		case 2:
+			s1 = AddStation(0);
+			break;
+		case 3:
+			Output(p1, s1);
+			break;
+		case 4:
+			PipeEdit(p1);
+			break;
+		case 5:
+			StationEdit(s1);
+			break;
+		case 6:
+			Save(p1, s1);
+			break;
+		case 7:
+			Load(p1, s1);
+			break;
+		default:
+			break;
+		}
+	}
+	return 0;
 }
 
