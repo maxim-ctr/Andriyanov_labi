@@ -32,6 +32,22 @@ int input_integer() {
 	return -1;
 }
 
+double input_double() {
+	string str;
+	cin.ignore();
+	cin >> str;
+	if (str.find_first_not_of("0123456789.") != string::npos || str.length() == count(str.begin(), str.end(), '.')) {
+		cout << "Wrong input\n";
+		cout << "Try again: \n";
+	}
+	else {
+		return stod(str);
+	}
+	return -1;
+}
+
+
+
 struct Pipe
 {
 	int id;
