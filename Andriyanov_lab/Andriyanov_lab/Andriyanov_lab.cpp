@@ -50,27 +50,52 @@ double input_double() {
 
 struct Pipe
 {
-	int id;
-	int d;
+	int id = 0;
+	int diameter;
+	double length;
+	bool isWorking = true;
 };
 
-void PrintPipe(Pipe& p)
-{
-  cout << "Truba " << p.id << " - diametr = " << p.d;
+bool PiExists(const Pipe& p) {
+	return p.id != -1;
 }
 
-Pipe AddPipe()
+
+Pipe AddPipe(int id)
 {
+	cout << "Adding Pipe\n";
 	Pipe p;
-	p.id = 0;
-	cout << "Vvedite diametr\n";
-	cin >> p.d;
+
+	cout << "Input diameter:\n";
+	p.diameter = 0;
+	while (p.diameter <= 0) {
+		p.diameter = input_integer();
+	}
+
+	cout << "Input length:\n";
+	p.length = 0;
+	while (p.length <= 0) {
+		p.length = input_double();
+	}
 	return p;
 }
 
+void PipeEdit(Pipe& p) {
+	// if (array_of_pipes != 0) {}
+	if (PiExists(p)) {
+		p.isWorking = !p.isWorking;
+		cout << "Pipe edited\n";
+		cout << "Is pipe working? " << p.isWorking << "\n";
+	}
+	else {
+		cout << "\nNo pipes\n";
+	}
+}
+
+
+
 int main()
 {
-	Pipe p = AddPipe();
-	PrintPipe(p);
+	
 }
 
