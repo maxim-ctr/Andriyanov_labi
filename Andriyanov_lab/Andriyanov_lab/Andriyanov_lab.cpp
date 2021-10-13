@@ -18,6 +18,19 @@ void printMenu() {
 	cout << "0. Exit\n\n";
 }
 
+int input_integer() {
+	string str;
+	cin.ignore();
+	cin >> str;
+	if (str.find_first_not_of("0123456789") != string::npos) {
+		cout << "Wrong input\n";
+		cout << "Try again: \n";
+	}
+	else {
+		return stoi(str);
+	}
+	return -1;
+}
 
 struct Pipe
 {
