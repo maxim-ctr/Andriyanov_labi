@@ -1,6 +1,4 @@
-﻿// Andriyanov_lab.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
+﻿
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -56,7 +54,7 @@ struct Pipe
 	bool isWorking = true;
 };
 
-bool PiExists(const Pipe& p) {
+bool PiExists(const Pipe& p) { //проверка существования трубы
 	return p.id != -1;
 }
 
@@ -81,7 +79,7 @@ Pipe AddPipe(int id)
 }
 
 void PipeEdit(Pipe& p) {
-	// if (array_of_pipes != 0) {}
+	
 	if (PiExists(p)) {
 		p.isWorking = !p.isWorking;
 		cout << "Pipe edited\n";
@@ -137,7 +135,7 @@ Station AddStation(int id) {
 }
 
 void StationEdit(Station& s) {
-	// if (array_of_stations != 0){}
+	
 	if (StExists(s)) {
 		cout << "Editing station\n";
 		cout << "Input number of working workshops:\n";
@@ -158,14 +156,14 @@ void StationEdit(Station& s) {
 void Output(const Pipe& p, const Station& s)
 {
 	cout << "\nOutput\n";
-	// if (vector_of_Pipes.length != 0
-	if (p.length > 0) {
+
+	if (p.length >0) {  //!
 		cout << "\nOutput Pipe(s)";
 		cout << "\nId: " << p.id;
 		cout << "\nDiameter: " << p.diameter;
 		cout << "\nLength: " << p.length << "\n";
 	}
-	// if (vector_of_Station.length != 0){}
+	
 	if (s.name != "") {
 		cout << "\nOutput station(s)";
 		cout << "\nId: " << s.id;
@@ -179,8 +177,7 @@ void Output(const Pipe& p, const Station& s)
 void Save(const Pipe& p, const Station& s) {
 	ofstream file;
 	file.open("database.txt");
-	// if(arrayStation.length() != 0) {}
-	// for (int i; i < arrayStation.length(); i++){}
+	
 	if (file.good()) {
 		if (p.length > 0) {
 			file << "Pipe:\n";
@@ -233,9 +230,9 @@ void Load(Pipe& p, Station& s) {
 int main()
 {
 	Pipe p1;
-	p1.length = -1;  // êîñòûëü
+	p1.length = -1;  
 	Station s1;
-	s1.name = "";  // êîñòûëü
+	s1.name = "";  
 
 	while (1) {
 		printMenu();
